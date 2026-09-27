@@ -1,0 +1,9 @@
+{
+  "name": "FH6 Ultimate Tuner AI V19",
+  "short_name": "FH6 Tuner V19",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#080b09",
+  "theme_color": "#35ff8d",
+  "icons": [{"src":"icon.svg","sizes":"192x192","type":"image/svg+xml"}]
+}

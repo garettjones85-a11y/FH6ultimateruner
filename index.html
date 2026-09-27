@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f1713" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="FH6 Tuner" />
+  <title>FH6 Ultimate Tuner AI V19</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Forza Horizon 6</p>
+      <h1>Ultimate Tuner AI V19</h1>
+    </div>
+    <button id="installBtn" class="ghost small" hidden>Install</button>
+  </header>
+
+  <main class="app-shell">
+    <section class="panel input-panel">
+      <div class="section-title">
+        <span>01</span>
+        <h2>Car Setup</h2>
+      </div>
+
+      <div class="grid two">
+        <label>Manufacturer<input id="maker" placeholder="Nissan" /></label>
+        <label>Model<input id="model" placeholder="Skyline GT-R" /></label>
+        <label>Year<input id="year" type="number" placeholder="2002" /></label>
+        <label>PI Class
+          <select id="carClass">
+            <option>D</option><option>C</option><option>B</option><option>A</option><option>S1</option><option>S2</option><option>R</option><option>X</option>
+          </select>
+        </label>
+        <label>Build Type
+          <select id="build">
+            <option value="top">Max Top Speed</option>
+            <option value="drag">Drag</option>
+            <option value="roll">Roll Race</option>
+            <option value="street">Street</option>
+            <option value="circuit">Circuit</option>
+            <option value="drift">Drift</option>
+            <option value="rally">Rally</option>
+            <option value="offroad">Off-road</option>
+          </select>
+        </label>
+        <label>Drivetrain
+          <select id="drive"><option>AWD</option><option>RWD</option><option>FWD</option></select>
+        </label>
+        <label>Horsepower<input id="hp" type="number" value="800" min="50" max="3000" /></label>
+        <label>Torque<input id="tq" type="number" value="650" min="50" max="3000" /></label>
+        <label>Weight lbs<input id="weight" type="number" value="3000" min="1000" max="7000" /></label>
+        <label>Front Weight %<input id="frontWeight" type="number" value="52" min="30" max="70" /></label>
+        <label>Tire Compound
+          <select id="compound"><option>Race</option><option>Drag</option><option>Semi-Slick</option><option>Sport</option><option>Street</option><option>Rally</option><option>Off-road</option><option>Drift</option></select>
+        </label>
+        <label>Transmission
+          <select id="gears"><option>4</option><option>5</option><option>6</option><option selected>7</option><option>8</option><option>9</option><option>10</option></select>
+        </label>
+        <label>Gear Tune Mode
+          <select id="gearMode">
+            <option value="auto">Auto Balanced</option>
+            <option value="topspeed" selected>Highest Top Speed</option>
+            <option value="draglaunch">Drag Launch</option>
+            <option value="roll">Roll Racing</option>
+            <option value="short">Short Acceleration</option>
+            <option value="custom">Custom Manual Bias</option>
+          </select>
+        </label>
+        <label>First Gear Style
+          <select id="firstStyle">
+            <option value="safe">Safer Launch</option>
+            <option value="normal" selected>Normal</option>
+            <option value="aggressive">Aggressive Launch</option>
+          </select>
+        </label>
+        <label>Gear Spacing
+          <select id="spacing">
+            <option value="close">Close Ratio</option>
+            <option value="progressive" selected>Progressive</option>
+            <option value="wide">Wide Upper Gears</option>
+          </select>
+        </label>
+        <label>Final Drive Bias
+          <select id="fdBias">
+            <option value="short">Shorter / Quicker</option>
+            <option value="normal" selected>Normal</option>
+            <option value="long">Longer / Faster</option>
+            <option value="max">Maximum Top Speed</option>
+          </select>
+        </label>
+        <label>Suspension Tune Mode
+          <select id="suspMode">
+            <option value="auto" selected>Auto From Build</option>
+            <option value="drag">Drag Race</option>
+            <option value="road">Road / Circuit</option>
+            <option value="drift">Drift</option>
+            <option value="rally">Rally / Off-road</option>
+            <option value="top">Top Speed Stability</option>
+          </select>
+        </label>
+        <label>Drag Launch Style
+          <select id="launchStyle">
+            <option value="safe">Safe / Low Spin</option>
+            <option value="balanced" selected>Balanced</option>
+            <option value="hard">Hard Launch</option>
+          </select>
+        </label>
+        <label>Wheelie Control
+          <select id="wheelieMode">
+            <option value="prevent" selected>Prevent Wheelies</option>
+            <option value="small">Small Controlled Lift</option>
+            <option value="aggressive">Aggressive Wheelie Setup</option>
+          </select>
+        </label>
+        <label>Wheel Hop Control
+          <select id="hopControl">
+            <option value="max" selected>Maximum Control</option>
+            <option value="balanced">Balanced</option>
+            <option value="loose">Loose / Softer</option>
+          </select>
+        </label>
+        <label>Drag Surface
+          <select id="dragSurface">
+            <option value="street" selected>Street</option>
+            <option value="strip">Prepared Strip</option>
+            <option value="airport">Airport / Highway</option>
+            <option value="dirt">Dirt Drag</option>
+          </select>
+        </label>
+        <label>Drag Distance
+          <select id="dragDistance">
+            <option value="quarter" selected>1/4 Mile</option>
+            <option value="half">1/2 Mile</option>
+            <option value="mile">Standing Mile</option>
+          </select>
+        </label>
+      </div>
+
+      <button id="generate" class="primary">Generate Complete Tune</button>
+      <p id="formError" class="advisor" role="alert" hidden></p>
+      <div class="button-row">
+        <button id="saveTune" class="ghost">Save Tune</button>
+        <button id="clearGarage" class="ghost danger">Clear Saves</button>
+      </div>
+    </section>
+
+    <section class="panel summary-card">
+      <div class="section-title">
+        <span>02</span>
+        <h2>Performance Summary</h2>
+      </div>
+      <div class="score-ring"><strong id="overallScore">--</strong><span>Overall</span></div>
+      <div class="metrics">
+        <div><span>Top Speed</span><b id="mTop">--</b></div>
+        <div><span>0-60</span><b id="m060">--</b></div>
+        <div><span>¼ Mile</span><b id="mQtr">--</b></div>
+        <div><span>Launch</span><b id="mLaunch">--</b></div>
+        <div><span>Grip</span><b id="mGrip">--</b></div>
+        <div><span>Stability</span><b id="mStability">--</b></div>
+      </div>
+      <p id="advisor" class="advisor">Enter car info, then generate a tune.</p>
+      <p class="advisor">Performance numbers are estimates, not measured FH6 results. Torque is recorded with your tune but does not change the calculated settings yet.</p>
+    </section>
+
+    <section class="panel results-panel">
+      <div class="section-title">
+        <span>03</span>
+        <h2>Forza Tuning Order</h2>
+      </div>
+      <div id="results" class="results"></div>
+    </section>
+
+    <section class="panel garage-panel">
+      <div class="section-title">
+        <span>04</span>
+        <h2>Garage</h2>
+      </div>
+      <div id="garage" class="garage-list"></div>
+    </section>
+  </main>
+
+  <template id="sectionTemplate">
+    <details class="tune-section" open>
+      <summary><span class="section-name"></span><button class="copy-btn" type="button">Copy</button></summary>
+      <div class="rows"></div>
+    </details>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
